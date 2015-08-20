@@ -1,0 +1,13 @@
+/*<style>*/
+body{
+	color: green;
+	font-size: large;
+}
+p{
+	font-size: large;
+	font-style: normal, italic, oblique;
+}
+img{
+	transform: rotate(20);
+}
+/*</style>
