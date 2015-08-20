@@ -1,44 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>06.02 - Create a point cloud from scratch - 2</title>
+    <title>Transportation Experiment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+    body {
+        margin: 0px;
+        overflow: hidden;
+    }
+    
+    #example {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="example"></div>
     <script src="libs/three.js"></script>
     <script src="libs/dat.gui.min.js"></script>
     <script src="libs/TrackballControls.js"></script>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<script>
-
+    <script src="libs/StereoEffect.js"></script>
+    <script src="libs/DeviceOrientationControls.js"></script>
+    <script src="libs/OrbitControls.js"></script>
+    <script src="libs/p5.js"></script>
+    <script src="libs/p5.sound.js"></script>
+    <script>
     // global variables
-    var renderer;
-    var scene;
-    var camera;
-    var camControls;
+    var renderer, scene, camera, effect, controls, element, container;
+    var clock = new THREE.Clock();
+    var sound,
+        bass,
+        lowMid,
+        highMid,
+        treble,
+        waveform,
+        spectrum,
+        fft;
 
+    init();
+    animate();
+
+    function preload() {
+        sound = loadSound("data/tramBell.wav")
+    }
+
+    function setup() {
+        cnv = createCanvas(1, 1);
+        sound.amp(0.5, 0.2);
+        sound.loop();
+        fft = new p5.FFT();
+    }
+
+    function draw() {
+        background(0);
+        waveform = fft.waveform();
+        spectrum = fft.analyze();
+        bass = fft.getEnergy("bass", "lowMid");
+        lowMid = fft.getEnergy("lowMid", "mid");
+        highMid = fft.getEnergy("mid", "highMid");
+        treble = fft.getEnergy("highMid", "treble");
+    }
 
     function init() {
 
-        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        renderer = new THREE.WebGLRenderer();
+        element = renderer.domElement;
+        container = document.getElementById('example');
+        container.appendChild(element);
+
+        effect = new THREE.StereoEffect(renderer);
+
         scene = new THREE.Scene();
 
-        // create a camera, which defines where we're looking at.
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 2000);
-        camControls = new THREE.TrackballControls(camera);
+        camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.window.innerHeight, 0.001, 700);
+        camera.position.set(0, 10, 0);
+        scene.add(camera);
 
-        // create a render, sets the background color and the size
-        renderer = new THREE.WebGLRenderer();
-        renderer.setClearColor(0x000000, 1.0);
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        controls = new THREE.OrbitControls(camera, element);
+        controls.rotateUp(Math.PI / 4);
+        controls.target.set(
+            camera.position.x + 0.1,
+            camera.position.y,
+            camera.position.z
+        );
+        controls.noZoom = true;
+        controls.noPan = true;
 
-        // create parametric and add to scene
-        // used http://reference.wolfram.com/mathematica/ref/ParametricPlot3D.html
-        // as reference
-        var paramFunction1 = function (u, v) {
+        function setOrientationControls(e) {
+            if (!e.alpha) {
+                return;
+            }
+
+            controls = new THREE.DeviceOrientationControls(camera, true);
+            controls.connect();
+            controls.update();
+
+            element.addEventListener('click', fullscreen, false);
+
+            window.removeEventListener('deviceorientation', setOrientationControls, true);
+        }
+        window.addEventListener('deviceorientation', setOrientationControls, true);
+
+
+        var paramFunction1 = function(u, v) {
             var u = (u * 2 * Math.PI) - Math.PI;
             var v = (v * 2 * Math.PI) - Math.PI;
 
@@ -51,7 +122,7 @@
         }
 
         // create parametric and add to scene
-        var paramFunction2 = function (u, v) {
+        var paramFunction2 = function(u, v) {
             var u = u * 2 * Math.PI;
             var v = (v * 2 * Math.PI) - Math.PI;
 
@@ -64,7 +135,7 @@
         }
 
         // create parametric and add to scene
-        var paramFunction3 = function (u, v) {
+        var paramFunction3 = function(u, v) {
             var u = u * 2;
             var v = (v * 4 * Math.PI);
 
@@ -78,7 +149,7 @@
 
         // create parametric and add to scene
         // http://paulbourke.net/geometry/klein/
-        var paramFunction4 = function (u, v) {
+        var paramFunction4 = function(u, v) {
             var a = 3;
             var n = 3;
             var m = 1;
@@ -93,7 +164,7 @@
             return new THREE.Vector3(x, y, z);
         }
 
-        var paramFunction5 = function (u, v) {
+        var paramFunction5 = function(u, v) {
 
             var u = u * Math.PI * 2;
             var v = v * 8 * Math.PI;
@@ -123,13 +194,12 @@
         ps.name = 'param';
         ps.sizeAttenuation = true;
         ps.sortParticles = true;
-        ps.scale.set(40,40,40)
+        ps.scale.set(40, 40, 40)
 
-//        ps.position.x -= x / 20;
-//        ps.position.z -= x / 20;
+        //        ps.position.x -= x / 20;
+        //        ps.position.z -= x / 20;
         // add the particle system to the scene
         scene.add(ps);
-
 
         // position and point the camera to the center of the scene
         camera.position.x = -50;
@@ -137,26 +207,55 @@
         camera.position.z = 250;
         camera.lookAt(new THREE.Vector3(0, 0, 0));
 
+        window.addEventListener('resize', resize, false);
+        setTimeout(resize, 1);
 
-        // add the output of the renderer to the html element
-        document.body.appendChild(renderer.domElement);
-
-        // call the render function
-        render();
     }
 
-    function render() {
-        renderer.render(scene, camera);
-        scene.getObjectByName('param').rotation.x += 0.01;
-        scene.getObjectByName('param').rotation.y += 0.01;
-        requestAnimationFrame(render);
-        camControls.update();
+    function resize() {
+        var width = container.offsetWidth;
+        var height = container.offsetHeight;
+
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(width, height);
+        effect.setSize(width, height);
     }
 
-    // calls the init function when the window is done loading.
-    window.onload = init;
+    function update(dt) {
+        resize();
 
-</script>
-<body>
+        camera.updateProjectionMatrix();
+
+        controls.update(dt);
+    }
+
+    function render(dt) {
+        effect.render(scene, camera);
+    }
+
+    function animate(t) {
+        requestAnimationFrame(animate);
+        scene.getObjectByName("param").rotation.x += 0.01;
+        scene.getObjectByName("param").rotation.y += 0.01;
+
+        update(clock.getDelta());
+        render(clock.getDelta());
+    }
+
+    function fullscreen() {
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        } else if (container.msRequestFullscreen) {
+            container.msRequestFullscreen();
+        } else if (container.mozRequestFullScreen) {
+            container.mozRequestFullScreen();
+        } else if (container.webkitRequestFullscreen) {
+            container.webkitRequestFullscreen();
+        }
+    }
+    </script>
 </body>
+
 </html>
