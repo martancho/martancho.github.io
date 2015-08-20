@@ -181,7 +181,7 @@
         directionalLight.position.set(-30, 50, 50);
         scene.add(directionalLight);
 
-        var geom = new THREE.ParametricGeometry(paramFunction4, 100, 10);
+        var geom = new THREE.ParametricGeometry(paramFunction3, 100, 50);
         var psMat = new THREE.PointCloudMaterial();
         psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
         psMat.color = new THREE.Color(0x55ff55);
@@ -194,7 +194,7 @@
         ps.name = 'param';
         ps.sizeAttenuation = true;
         ps.sortParticles = true;
-        ps.scale.set(40, 40, 40)
+        ps.scale.set(100, 60, 60)
 
         //        ps.position.x -= x / 20;
         //        ps.position.z -= x / 20;
