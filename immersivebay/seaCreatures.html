@@ -23,7 +23,7 @@
 
 <body>
     <div id="example"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r71/three.min.js"></script>
+    <script src="libs/three.min.js"></script>
     <script src="libs/StereoEffect.js"></script>
     <script src="libs/DeviceOrientationControls.js"></script>
     <script src="libs/OrbitControls.js"></script>
@@ -70,7 +70,7 @@
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
     }
-    
+
     function init() {
         renderer = new THREE.WebGLRenderer();
         element = renderer.domElement;
