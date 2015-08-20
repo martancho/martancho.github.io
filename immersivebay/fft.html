@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>FFT visualisation</title>
+    <style>
+    body {
+        margin: 0px;
+        overflow: hidden;
+    }
+    
+    #webglviewer {
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="example"></div>
+    <script type="text/javascript" src="libs/p5.js"></script>
+    <script type="text/javascript" src="libs/p5.sound.js"></script>
+    <script src="libs/three.min.js"></script>
+    <script src="libs/DeviceOrientationControls.js"></script>
+    <script src="libs/StereoEffect.js"></script>
+    <script src="libs/OrbitControls.js"></script>
+    <script type="text/javascript">
+    var effect, cnv, waveform, spectrum, energy, renderer, element, container, scence, camera;
+
+init();
+
+function preload() {
+    sound = loadSound('data/seagullCacophony.wav')
+}
+
+function setup() {
+    cnv = createCanvas(100,100);
+    push();
+    translate(width+100, height+100);
+    cnv2 = createCanvas(200, 200);
+    pop(); 
+    sound.amp(0);
+    sound.loop();
+    fft = new p5.FFT();
+}
+
+function init(){
+    // renderer = new THREE.WebGLRenderer();
+    // element = renderer.domElement;
+    // container = document.getElementById('example');
+    // container.appendChild(element);
+
+    effect = new THREE.StereoEffect(cnv);
+
+    scene = new THREE.Scene();
+
+    camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.window.innerHeight, 0.001, 700);
+    camera.position.set(0, 10, 0);
+    scene.add(camera);
+}
+
+function draw() {
+    waveform = fft.waveform();
+    spectrum = fft.analyze();
+    energy = fft.getEnergy("lowMid", "treble");
+    for (i = 0; i < spectrum.length; i++) {
+        var absWave = map(i, 0, spectrum.length, 0, width);
+    }
+
+    background(0);
+    console.log(absWave);
+
+    noStroke();
+    fill(0, 255, 0); // spectrum is green
+    for (var i = 0; i < spectrum.length; i++) {
+        var x = map(i, 0, spectrum.length, 0, width);
+        var h = -height + map(spectrum[i], 0, 255, height, 0);
+        rect(x, height, width / spectrum.length, h)
+    }
+
+    noFill();
+    beginShape();
+    stroke(255, 0, 0); // waveform is red
+    strokeWeight(1);
+    for (var i = 0; i < waveform.length; i++) {
+        var x = map(i, 0, waveform.length, 0, width);
+        var y = map(waveform[i], -1, 1, 0, height);
+        vertex(x, y);
+        ellipse(x, y, energy, energy)
+    }
+    endShape();
+
+    isMouseOverCanvas();
+}
+
+// fade sound if mouse is over canvas
+function isMouseOverCanvas() {
+    var mX = mouseX,
+        mY = mouseY;
+    if (mX > 0 && mX < width && mY < height && mY > 0) {
+        sound.amp(0.5, 0.2);
+    } else {
+        sound.amp(0, 0.2);
+    }
+}
+
+function fullscreen() {
+    if (container.requestFullscreen) {
+        container.requestFullscreen();
+    } else if (container.msRequestFullscreen) {
+        container.msRequestFullscreen();
+    } else if (container.mozRequestFullScreen) {
+        container.mozRequestFullScreen();
+    } else if (container.webkitRequestFullscreen) {
+        container.webkitRequestFullscreen();
+    }
+}
+
+    </script>
+
+</body>
+
+</html>
