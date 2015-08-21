@@ -71,6 +71,8 @@
     function init() {
 
         renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
+
         element = renderer.domElement;
         container = document.getElementById('example');
         container.appendChild(element);
@@ -181,7 +183,7 @@
         directionalLight.position.set(-30, 50, 50);
         scene.add(directionalLight);
 
-        var geom = new THREE.ParametricGeometry(paramFunction3, 100, 50);
+        var geom = new THREE.ParametricGeometry(paramFunction3, 100, 100);
         var psMat = new THREE.PointCloudMaterial();
         psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
         psMat.color = new THREE.Color(0x55ff55);
