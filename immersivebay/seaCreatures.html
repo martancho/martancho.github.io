@@ -49,8 +49,6 @@
     var clock = new THREE.Clock();
 
     init();
- 
-
 
     function preload() {
         sound = loadSound("data/seaLion3.wav")
@@ -222,11 +220,12 @@
 
     function render(dt) {
         var rot = bass * 0.00002;
+        var pos = lowMid * 0.00002;
         requestAnimationFrame(animate);
-        scene.getObjectByName("param").rotation.x += rot*0.5;
-        scene.getObjectByName("param").rotation.y += rot*0.5;
-        scene.getObjectByName("param1").scale.x += rot*0.5;
-        scene.getObjectByName("param1").scale.y += rot*0.5;
+        scene.getObjectByName("param").rotation.x += rot*0.1;
+        scene.getObjectByName("param").rotation.y += rot*0.1;
+        scene.getObjectByName("param1").position.x += pos*0.1;
+        scene.getObjectByName("param1").position.y += pos*0.1;
         effect.render(scene, camera);
     }
 

@@ -41,7 +41,7 @@
         controls,
         clock,
         sound,
-        low,
+        bass,
         lowMid,
         highMid,
         treble,
@@ -51,7 +51,7 @@
 
         // Particles
         particles = new THREE.Object3D(),
-        totalParticles = 200,
+        totalParticles = 100,
         maxParticleSize = 200,
         particleRotationSpeed = 0,
         particleRotationDeg = 0,
@@ -90,17 +90,10 @@
         background(0);
         waveform = fft.waveform();
         spectrum = fft.analyze();
-        energy = fft.getEnergy("lowMid", "treble");
-        noFill();
-        beginShape();
-        stroke(255, 0, 0); // waveform is red
-        strokeWeight(1);
-        for (var i = 0; i < waveform.length; i++) {
-            absWave = map(i, 0, waveform.length, 0, width);
-            absWaveY = map(waveform[i], -1, 1, 0, height);
-            ellipse(absWave, absWaveY, energy, energy)
-        }
-        endShape();
+        bass = fft.getEnergy("bass", "lowMid");
+        lowMid = fft.getEnergy("lowMid", "mid");
+        highMid = fft.getEnergy("mid", "highMid");
+        treble = fft.getEnergy("highMid", "treble");
     }
 
     init();

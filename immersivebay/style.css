@@ -1,0 +1,8 @@
+body{
+	color: green;
+	font-size: large;
+}
+li.one{
+	border-style: groove;
+	border-width: 5px;
+}

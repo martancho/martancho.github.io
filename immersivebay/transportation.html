@@ -45,10 +45,9 @@
         fft;
 
     init();
-    animate();
 
     function preload() {
-        sound = loadSound("data/tramBell.wav")
+        sound = loadSound("data/transportation.wav")
     }
 
     function setup() {
@@ -56,6 +55,7 @@
         sound.amp(0.5, 0.2);
         sound.loop();
         fft = new p5.FFT();
+        frameRate(5);
     }
 
     function draw() {
@@ -66,6 +66,9 @@
         lowMid = fft.getEnergy("lowMid", "mid");
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
+
+        animate();
+
     }
 
     function init() {
@@ -183,7 +186,18 @@
         directionalLight.position.set(-30, 50, 50);
         scene.add(directionalLight);
 
-        var geom = new THREE.ParametricGeometry(paramFunction3, 100, 100);
+        
+
+        // position and point the camera to the center of the scene
+        camera.position.x = -50;
+        camera.position.y = 150;
+        camera.position.z = 250;
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+        window.addEventListener('resize', resize, false);
+        setTimeout(resize, 1);
+
+        var geom = new THREE.ParametricGeometry(paramFunction2, 50, 100);
         var psMat = new THREE.PointCloudMaterial();
         psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
         psMat.color = new THREE.Color(0x55ff55);
@@ -198,19 +212,24 @@
         ps.sortParticles = true;
         ps.scale.set(100, 60, 60)
 
-        //        ps.position.x -= x / 20;
-        //        ps.position.z -= x / 20;
-        // add the particle system to the scene
         scene.add(ps);
 
-        // position and point the camera to the center of the scene
-        camera.position.x = -50;
-        camera.position.y = 150;
-        camera.position.z = 250;
-        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        var geo = new THREE.ParametricGeometry(paramFunction5, 100, 50);
+        var psMater = new THREE.PointCloudMaterial();
+        psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
+        psMat.color = new THREE.Color(0x55ff55);
+        psMat.transparent = true;
+        psMat.size = 2.4;
+        psMat.blending = THREE.AdditiveBlending;
 
-        window.addEventListener('resize', resize, false);
-        setTimeout(resize, 1);
+        // Create a new particle system based on the provided geometry
+        ps2 = new THREE.PointCloud(geo, psMater);
+        ps2.name = 'param2';
+        ps2.sizeAttenuation = true;
+        ps2.sortParticles = true;
+        ps2.scale.set(100, 100, 100)
+
+        scene.add(ps2);
 
     }
 
@@ -234,16 +253,18 @@
     }
 
     function render(dt) {
+        requestAnimationFrame(animate);
         effect.render(scene, camera);
+        scene.getObjectByName("param").rotation.x += 0.01;
+        scene.getObjectByName("param").rotation.z += 0.01;
+        scene.getObjectByName("param2").rotation.x += 0.01;
+        scene.getObjectByName("param2").rotation.z += 0.01;
     }
 
     function animate(t) {
-        requestAnimationFrame(animate);
-        scene.getObjectByName("param").rotation.x += 0.01;
-        scene.getObjectByName("param").rotation.y += 0.01;
-
-        update(clock.getDelta());
-        render(clock.getDelta());
+        // update(clock.getDelta());
+        // render(clock.getDelta());
+        render();
     }
 
     function fullscreen() {
