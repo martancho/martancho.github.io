@@ -25,10 +25,6 @@
     <div id="example"></div>
     <script type="text/javascript" src="libs/p5.js"></script>
     <script type="text/javascript" src="libs/p5.sound.js"></script>
-    <script src="libs/three.min.js"></script>
-    <script src="libs/DeviceOrientationControls.js"></script>
-    <script src="libs/StereoEffect.js"></script>
-    <script src="libs/OrbitControls.js"></script>
     <script type="text/javascript">
     var bass, lowMid, highMid, treble, waveform, spectrum, fft;
 
@@ -38,7 +34,7 @@
 
     function setup() {
         createCanvas(320, 480);
-        sound.amp(0.5, 0.2);
+        sound.amp(0.9, 0.2);
         sound.loop();
         rectMode(CENTER);
         fft = new p5.FFT();
@@ -58,7 +54,6 @@
         rotate(treble/100);
         fill(treble, lowMid, bass); // modulo is used to make sure it's always a value between o and 360
         rect(0, 0, width/2, height/2, treble, bass, lowMid, highMid);
-        
     }
     </script>
 </body>
