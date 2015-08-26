@@ -38,15 +38,14 @@
 
     function setup() {
         createCanvas(displayWidth, displayHeight);
-        colorMode(HSB); // HUE saturation Brightnes
         sound.amp(0.5, 0.2);
         sound.loop();
-        ellipseMode(CENTER);
+        rectMode(CENTER);
         fft = new p5.FFT();
     }
 
     function draw() {
-        background(255);
+        background(bass, treble, highMid);
         waveform = fft.waveform();
         spectrum = fft.analyze();
         bass = fft.getEnergy("bass", "lowMid");
@@ -56,14 +55,10 @@
 
         noStroke();
         translate(width*0.5, height*0.5);
-        fill(bass % 360, 100, 100, 5); // modulo is used to make sure it's always a value between o and 360
-        ellipse(0, 0, highMid*4, lowMid)*4;
-        noStroke();
-        fill(treble, 100, 100, 5); // modulo is used to make sure it's always a value between o and 360
-        ellipse(width / 2, height / 2, treble, bass);
-        noStroke();
-        fill(highMid, lowMid, treble, 5); // modulo is used to make sure it's always a value between o and 360
-        ellipse(bass, treble/10, bass, treble);
+        rotate(treble/100);
+        fill(treble, lowMid, bass); // modulo is used to make sure it's always a value between o and 360
+        rect(0, 0, width/2, height/2, treble, bass, lowMid, highMid);
+        
     }
     </script>
 </body>
