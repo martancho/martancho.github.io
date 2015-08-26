@@ -256,9 +256,13 @@
         requestAnimationFrame(animate);
         scene.getObjectByName("param").rotation.x += 0.01;
         scene.getObjectByName("param").rotation.z += 0.01;
+        scene.getObjectByName("param").position.x += 0.001;
+        scene.getObjectByName("param").position.z += 0.001;
         scene.getObjectByName("param2").rotation.x += 0.01;
         scene.getObjectByName("param2").rotation.z += 0.01;
-        
+        scene.getObjectByName("param2").position.x += 0.001;
+        scene.getObjectByName("param2").position.z += 0.001;
+
         update(clock.getDelta());
         render(clock.getDelta());
     }
