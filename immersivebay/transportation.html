@@ -45,7 +45,7 @@
         fft;
 
     init();
-
+    animate();
     function preload() {
         sound = loadSound("data/transportation.wav")
     }
@@ -55,7 +55,6 @@
         sound.amp(0.5, 0.2);
         sound.loop();
         fft = new p5.FFT();
-        frameRate(5);
     }
 
     function draw() {
@@ -66,9 +65,6 @@
         lowMid = fft.getEnergy("lowMid", "mid");
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
-
-        animate();
-
     }
 
     function init() {
@@ -253,15 +249,15 @@
     }
 
     function render(dt) {
-        requestAnimationFrame(animate);
         effect.render(scene, camera);
+    }
+
+    function animate(t) {
+        requestAnimationFrame(animate);
         scene.getObjectByName("param").rotation.x += 0.01;
         scene.getObjectByName("param").rotation.z += 0.01;
         scene.getObjectByName("param2").rotation.x += 0.01;
         scene.getObjectByName("param2").rotation.z += 0.01;
-    }
-
-    function animate(t) {
         // update(clock.getDelta());
         // render(clock.getDelta());
         render();
