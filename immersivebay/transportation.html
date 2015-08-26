@@ -258,9 +258,8 @@
         scene.getObjectByName("param").rotation.z += 0.01;
         scene.getObjectByName("param2").rotation.x += 0.01;
         scene.getObjectByName("param2").rotation.z += 0.01;
-        // update(clock.getDelta());
-        // render(clock.getDelta());
-        render();
+        update(clock.getDelta());
+        render(clock.getDelta());
     }
 
     function fullscreen() {
