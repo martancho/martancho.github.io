@@ -65,6 +65,20 @@
         lowMid = fft.getEnergy("lowMid", "mid");
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
+        console.log(treble);
+        scene.getObjectByName("param").rotation.x += treble/1000;
+        scene.getObjectByName("param").rotation.z += highMid/1000;
+        scene.getObjectByName("param").scale.x += bass/1000;
+
+        scene.getObjectByName("param").position.x += 0.001;
+        scene.getObjectByName("param").position.z += 0.001;
+        scene.getObjectByName("param2").rotation.x += 0.01;
+        scene.getObjectByName("param2").rotation.z += 0.01;
+        scene.getObjectByName("param2").position.x += 0.001;
+        scene.getObjectByName("param2").position.z += 0.001;
+
+        update(clock.getDelta());
+        render(clock.getDelta());
     }
 
     function init() {
@@ -84,15 +98,15 @@
         camera.position.set(0, 10, 0);
         scene.add(camera);
 
-        // controls = new THREE.OrbitControls(camera, element);
-        // controls.rotateUp(Math.PI / 4);
-        // controls.target.set(
-        //     camera.position.x + 0.1,
-        //     camera.position.y,
-        //     camera.position.z
-        // );
-        // controls.noZoom = true;
-        // controls.noPan = true;
+        controls = new THREE.OrbitControls(camera, element);
+        controls.rotateUp(Math.PI / 4);
+        controls.target.set(
+            camera.position.x + 0.1,
+            camera.position.y,
+            camera.position.z
+        );
+        controls.noZoom = true;
+        controls.noPan = true;
 
         function setOrientationControls(e) {
             if (!e.alpha) {
@@ -109,19 +123,6 @@
         }
         window.addEventListener('deviceorientation', setOrientationControls, true);
 
-
-        var paramFunction1 = function(u, v) {
-            var u = (u * 2 * Math.PI) - Math.PI;
-            var v = (v * 2 * Math.PI) - Math.PI;
-
-            var x = Math.sin(u) * Math.sin(v) + 0.05 * Math.cos(20 * v);
-            var y = Math.cos(u) * Math.sin(v) + 0.05 * Math.cos(20 * u);
-            var z = Math.cos(v);
-
-
-            return new THREE.Vector3(x, y, z);
-        }
-
         // create parametric and add to scene
         var paramFunction2 = function(u, v) {
             var u = u * 2 * Math.PI;
@@ -131,36 +132,6 @@
             var y = Math.sin(u) + Math.cos(v);
             var z = Math.sin(v);
 
-
-            return new THREE.Vector3(x, y, z);
-        }
-
-        // create parametric and add to scene
-        var paramFunction3 = function(u, v) {
-            var u = u * 2;
-            var v = (v * 4 * Math.PI);
-
-            var x = Math.cos(v) * Math.sin(u);
-            var y = Math.sin(v) * Math.sin(u);
-            var z = 0.2 * v + (Math.cos(u) + Math.log(Math.tan(u / 2)));
-
-
-            return new THREE.Vector3(x, y, z);
-        }
-
-        // create parametric and add to scene
-        // http://paulbourke.net/geometry/klein/
-        var paramFunction4 = function(u, v) {
-            var a = 3;
-            var n = 3;
-            var m = 1;
-
-            var u = u * 4 * Math.PI;
-            var v = v * 2 * Math.PI;
-
-            var x = (a + Math.cos(n * u / 2.0) * Math.sin(v) - Math.sin(n * u / 2.0) * Math.sin(2 * v)) * Math.cos(m * u / 2.0);
-            var y = (a + Math.cos(n * u / 2.0) * Math.sin(v) - Math.sin(n * u / 2.0) * Math.sin(2 * v)) * Math.sin(m * u / 2.0);
-            var z = Math.sin(n * u / 2.0) * Math.sin(v) + Math.cos(n * u / 2.0) * Math.sin(2 * v);
 
             return new THREE.Vector3(x, y, z);
         }
@@ -254,17 +225,7 @@
 
     function animate(t) {
         requestAnimationFrame(animate);
-        scene.getObjectByName("param").rotation.x += 0.01;
-        scene.getObjectByName("param").rotation.z += 0.01;
-        scene.getObjectByName("param").position.x += 0.001;
-        scene.getObjectByName("param").position.z += 0.001;
-        scene.getObjectByName("param2").rotation.x += 0.01;
-        scene.getObjectByName("param2").rotation.z += 0.01;
-        scene.getObjectByName("param2").position.x += 0.001;
-        scene.getObjectByName("param2").position.z += 0.001;
-
-        update(clock.getDelta());
-        render(clock.getDelta());
+        
     }
 
     function fullscreen() {
