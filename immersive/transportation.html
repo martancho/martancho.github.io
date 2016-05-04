@@ -47,7 +47,7 @@
     init();
     animate();
     function preload() {
-        sound = loadSound("data/transportation.mp3")
+        sound = loadSound("data/electronicJam.mp3")
     }
 
     function setup() {
@@ -66,9 +66,9 @@
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
         console.log(treble);
-        scene.getObjectByName("param").rotation.x += treble/1000;
-        scene.getObjectByName("param").rotation.z += highMid/1000;
-        scene.getObjectByName("param").scale.x += bass/1000;
+        scene.getObjectByName("param").rotation.x += Math.cos(treble/10000);
+        scene.getObjectByName("param").rotation.z += Math.cos(highMid/1000);
+        scene.getObjectByName("param").scale.x += Math.cos(bass/1000);
 
         scene.getObjectByName("param").position.x += 0.001;
         scene.getObjectByName("param").position.z += 0.001;
