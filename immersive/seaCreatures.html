@@ -43,7 +43,7 @@
 
 
         function preload() {
-            sound = loadSound("data/seaCreatures.mp3")
+            sound = loadSound("data/CalartsSoundScape.mp3")
         }
 
         function setup() {
@@ -62,22 +62,20 @@
             highMid = fft.getEnergy("mid", "highMid");
             treble = fft.getEnergy("highMid", "treble");
 
-            mapTreble = map(treble, 30, 150, 0, 1);
-
             console.log(mapTreble);
 
-            scene.getObjectByName("param").rotation.x += Math.cos(mapTreble);
-            scene.getObjectByName("param").rotation.y += 0.02;
-            scene.getObjectByName("param").scale.x += Math.cos(mapTreble);
-            scene.getObjectByName("param").scale.y += Math.sin(bass/2);
-            scene.getObjectByName("param").position.x += treble/10000;
-            scene.getObjectByName("param").position.y += highMid/80000;
-            scene.getObjectByName("param1").rotation.x += 0.001;
-            scene.getObjectByName("param1").rotation.y += 0.001;
-            scene.getObjectByName("param1").scale.x += 0.0001;
-            scene.getObjectByName("param1").scale.y += 0.001;
-            scene.getObjectByName("param1").position.x += lowMid/10000;
-            scene.getObjectByName("param1").position.y += lowMid/20000;
+            scene.getObjectByName("param").rotation.x += treble/2000;
+            scene.getObjectByName("param").rotation.y += treble/1000;
+            scene.getObjectByName("param").scale.x += bass/100000;
+            scene.getObjectByName("param").scale.y += bass/200000;
+            scene.getObjectByName("param").position.x += 0.0001;
+            scene.getObjectByName("param").position.y += 0.001;
+            scene.getObjectByName("param1").rotation.x += lowMid/10000;
+            scene.getObjectByName("param1").rotation.y += lowMid/20000;
+            scene.getObjectByName("param1").scale.x += highMid/100000;
+            scene.getObjectByName("param1").scale.y += highMid/200000;
+            scene.getObjectByName("param1").position.x += 0.001;
+            scene.getObjectByName("param1").position.y +=0.001;
 
             update(clock.getDelta());
             render(clock.getDelta());
@@ -165,7 +163,7 @@
                 return new THREE.Vector3(x, y, z);
             }
 
-            var geom = new THREE.ParametricGeometry(paramFunction1, 100, 100);
+            var geom = new THREE.ParametricGeometry(paramFunction1, 80, 80);
             var mat = new THREE.MeshPhongMaterial({
                 color: 0x33ccff,
                 side: THREE.DoubleSide,
@@ -178,7 +176,7 @@
 
             scene.add(mesh);
 
-            var geo = new THREE.ParametricGeometry(paramFunction2, 100, 100);
+            var geo = new THREE.ParametricGeometry(paramFunction2, 70, 70);
             var mater = new THREE.MeshPhongMaterial({
                 color: 0xcc3333a,
                 side: THREE.DoubleSide,
@@ -200,7 +198,7 @@
                 map: texture
             });
 
-            var geometry = new THREE.BoxGeometry(500, 500, 500);
+            var geometry = new THREE.BoxGeometry(200, 200, 200);
 
             var mesh2 = new THREE.Mesh(geometry, material);
             mesh2.rotation.x = -Math.PI / 2;
