@@ -1,4 +1,43 @@
 /*<style>*/
+.container{
+	width: 960px;
+}
+
+.header{
+	background-color: rgba(200, 55, 255, 0.95);
+	border-bottom: 1px solid #ddd;
+
+	font-family: 'Oswald', sans-serif;
+	font-weight: 300;
+	font-size: 17px;
+	padding: 15px;
+}
+
+.header .menu{
+	float: right;
+	list-style: none;
+	margin-top: 5px;
+}
+.menu > li{
+	display: inline;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+.menu a{
+	color: rgba(50, 255, 50, 1);
+}
+
+/* Dropdown menu */
+.dropdown-menu{
+	font-size: 16px;
+	margin-top: 5px;
+	min-width: 105px;
+}
+.dropdown-menu li a{
+	color: rgba(50, 255, 50, 1);
+	padding: 6px 20px;
+	font-weight: 300;
+}
 body{
 	color: green;
 	font-size: large;

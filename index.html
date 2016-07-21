@@ -1,42 +1,58 @@
     <!DOCTYPE html>
-<html>
+    <html>
 
-<head>
-    <title>Martin's page</title>
+    <head>
+        <title>Martancho</title>
+        <!-- google font Oswald -->
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300' rel='stylesheet'>
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <!-- latest compiled and minified CSS -->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+        <link href="style.css" rel="stylesheet">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-</head>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<body bgcolor="#40e0d0">
-    <h1>Martancho's first page</h1>
-    <h3>Fruit List</h3>
-    <ol style="list-style-type: square">
-        <li>
-            Oragnes</li>
-        <li>Apples</li>
-        <li>Bananas</li> <a href="giraffe.html">Giraffe</a>
-    </ol>
-    <p>
-        Ponte en pie alza el puño y ven, a la fiesta <em>pagana</em> en la hoguera hay de beber! Ellos tienen el credo y nosotros nuestro sudor.
-    </p>
-    <h2>El Logo</h2>
-    <img src="Logo.svg">
-    <marquee>
-    <svg width="200" height="200">
-        <circle cx="100" cy="100" r="50" stroke="blue" stroke-width="4" fill="red" />
-    </svg>
-    </marque>
-    <svg width = "300" height="300">
-        <rectangle 
-    <marquee> Hola que hace?</marquee>
-</body>
+        <script src="app.js"></script>
 
-</html>
+    </head>
+
+    <body bgcolor="#40e0d0">
+        <div class="header">
+            <div class="container">
+                <a href="#" class="logo-icon">
+                  <img src="Logo.png">
+              </a>
+
+              <ul class="menu">
+                <li><a href="#">About</a>
+                <li><a href="/immersive/index.html">Immersive</a></li>
+                    <li><a href="#">Page 2</a></li>
+                    <li><a href="#">Page 3</a></li>
+                    <li><a href="giraffe.html">Jirafa</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">More <b class="carret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">CV</a></li>
+                            <li><a href="#">Previous Works</a></li>
+                            <li><a href="#">Gallery</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <h1>Welcome to Martancho's playground and portfolio</h1>
+        <marquee behavior="alternate", bgcolor="cyan">
+
+            <svg width="200" height="200">
+                <polygon points="100,10 40,198 190,78 10,78 160,198"
+                style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+            </svg>
+        </marquee>
+
+    </body>
+
+    </html>
