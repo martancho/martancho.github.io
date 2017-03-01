@@ -65,8 +65,8 @@
         lowMid = fft.getEnergy("lowMid", "mid");
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
-        console.log(treble);
-        scene.getObjectByName("param").rotation.x += Math.cos(treble/100);
+        
+        var test1 = scene.getObjectByName("param").rotation.x += Math.cos(treble/100);
         scene.getObjectByName("param").rotation.z += Math.cos(highMid/100);
         scene.getObjectByName("param").scale.x += Math.cos(bass/10);
         scene.getObjectByName("param").scale.y += Math.cos(bass/10);
@@ -80,6 +80,9 @@
 
         update(clock.getDelta());
         render(clock.getDelta());
+
+        console.log(test1);
+
     }
 
     function init() {
@@ -165,7 +168,7 @@
         window.addEventListener('resize', resize, false);
         setTimeout(resize, 1);
 
-        var geom = new THREE.ParametricGeometry(paramFunction2, 50, 100);
+        var geo1 = new THREE.ParametricGeometry(paramFunction2, 50, 100);
         var psMat = new THREE.PointCloudMaterial();
         psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
         psMat.color = new THREE.Color(0x55ff55);
@@ -174,24 +177,24 @@
         psMat.blending = THREE.AdditiveBlending;
 
         // Create a new particle system based on the provided geometry
-        ps = new THREE.PointCloud(geom, psMat);
+        ps = new THREE.PointCloud(geo1, psMat);
         ps.name = 'param';
         ps.sizeAttenuation = true;
         ps.sortParticles = true;
-        ps.scale.set(100, 60, 60)
+        ps.scale.set(100, 100, 100)
 
         scene.add(ps);
 
-        var geo = new THREE.ParametricGeometry(paramFunction5, 100, 50);
+        var geo2 = new THREE.ParametricGeometry(paramFunction5, 100, 50);
         var psMater = new THREE.PointCloudMaterial();
-        psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
-        psMat.color = new THREE.Color(0x55ff55);
-        psMat.transparent = true;
-        psMat.size = 2.4;
-        psMat.blending = THREE.AdditiveBlending;
+        psMater.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
+        psMater.color = new THREE.Color(0xff3300);
+        psMater.transparent = true;
+        psMater.size = 2.4;
+        psMater.blending = THREE.AdditiveBlending;
 
         // Create a new particle system based on the provided geometry
-        ps2 = new THREE.PointCloud(geo, psMater);
+        ps2 = new THREE.PointCloud(geo2, psMater);
         ps2.name = 'param2';
         ps2.sizeAttenuation = true;
         ps2.sortParticles = true;

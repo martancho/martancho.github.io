@@ -44,8 +44,7 @@
         spectrum,
         fft;
 
-    init();
-    animate();
+    
     function preload() {
         sound = loadSound("data/transportation.mp3")
     }
@@ -55,9 +54,13 @@
         sound.amp(0.9, 0.2);
         sound.loop();
         fft = new p5.FFT();
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0x000000, 1.0);
     }
 
     function draw() {
+    init();
+        animate();
         background(0);
         waveform = fft.waveform();
         spectrum = fft.analyze();
@@ -65,29 +68,32 @@
         lowMid = fft.getEnergy("lowMid", "mid");
         highMid = fft.getEnergy("mid", "highMid");
         treble = fft.getEnergy("highMid", "treble");
-        console.log(treble);
-        scene.getObjectByName("param").rotation.x += Math.cos(highMid/100);
-        scene.getObjectByName("param").rotation.z += Math.cos(highMid/100);
-        scene.getObjectByName("param").scale.x += Math.cos(bass/10);
-        scene.getObjectByName("param").scale.y += Math.cos(bass/10);
+        
+        var test1 = scene.getObjectByName("param").rotation.x += Math.sin(treble*4);
+        scene.getObjectByName("param").rotation.y += Math.cos(highMid*4);
+        scene.getObjectByName("param").scale.x += Math.cos(lowMid*2);
+        scene.getObjectByName("param").scale.y += Math.cos(bass*2);
+        scene.getObjectByName("param").position.x += 0.01;
+        scene.getObjectByName("param").position.y += 0.01;
+        scene.getObjectByName("param").position.z += 0.01;
 
-        scene.getObjectByName("param").position.x += 0.001;
-        scene.getObjectByName("param").position.z += 0.001;
-        scene.getObjectByName("param2").rotation.x +=(treble/500);
-        scene.getObjectByName("param2").rotation.z += (treble/500);
-        scene.getObjectByName("param2").scale.z += (lowMid/500);
-        scene.getObjectByName("param2").scale.y += (lowMid/500);
+        scene.getObjectByName("param2").rotation.x += 0.01;
+        scene.getObjectByName("param2").rotation.z += 0.01;
+        scene.getObjectByName("param2").scale.x += Math.cos(bass/2);
+        scene.getObjectByName("param2").scale.y += Math.cos(treble/2);
         scene.getObjectByName("param2").position.x += 0.001;
         scene.getObjectByName("param2").position.z += 0.001;
 
         update(clock.getDelta());
         render(clock.getDelta());
+
+        console.log(test1);
+
     }
 
     function init() {
 
-        renderer = new THREE.WebGLRenderer();
-        renderer.setClearColor(0x000000, 1.0);
+        
 
         element = renderer.domElement;
         container = document.getElementById('example');
@@ -127,27 +133,51 @@
         window.addEventListener('deviceorientation', setOrientationControls, true);
 
         // create parametric and add to scene
-        var paramFunction1 = function(u, v) {
-                var u = (u * 2 * Math.PI) - Math.PI;
-                var v = (v * 2 * Math.PI) - Math.PI;
-
-                var x = Math.sin(u) * Math.sin(v) + 0.05 * Math.cos(20 * v);
-                var y = Math.cos(u) * Math.sin(v) + 0.05 * Math.cos(20 * u);
-                var z = Math.cos(v);
-
-
-                return new THREE.Vector3(x, y, z);
-            }
-
-        var paramFunction5 = function(u, v) {
-
+         var paramFunction1 = function (u, v) {
+            var u = (u * 2 * Math.PI) - Math.PI;
+            var v = (v * 2 * Math.PI) - Math.PI;
+            var x = Math.sin(u) * Math.sin(v) + 0.05 * Math.cos(20 * v);
+            var y = Math.cos(u) * Math.sin(v) + 0.05 * Math.cos(20 * u);
+            var z = Math.cos(v);
+            return new THREE.Vector3(x, y, z);
+        }
+        // create parametric and add to scene
+        var paramFunction2 = function (u, v) {
+            var u = u * 2 * Math.PI;
+            var v = (v * 2 * Math.PI) - Math.PI;
+            var x = Math.cos(u);
+            var y = Math.sin(u) + Math.cos(v);
+            var z = Math.sin(v);
+            return new THREE.Vector3(x, y, z);
+        }
+        // create parametric and add to scene
+        var paramFunction3 = function (u, v) {
+            var u = u * 2;
+            var v = (v * 4 * Math.PI);
+            var x = Math.cos(v) * Math.sin(u);
+            var y = Math.sin(v) * Math.sin(u);
+            var z = 0.2 * v + (Math.cos(u) + Math.log(Math.tan(u / 2)));
+            return new THREE.Vector3(x, y, z);
+        }
+        // create parametric and add to scene
+        // http://paulbourke.net/geometry/klein/
+        var paramFunction4 = function (u, v) {
+            var a = 3;
+            var n = 3;
+            var m = 1;
+            var u = u * 4 * Math.PI;
+            var v = v * 2 * Math.PI;
+            var x = (a + Math.cos(n * u / 2.0) * Math.sin(v) - Math.sin(n * u / 2.0) * Math.sin(2 * v)) * Math.cos(m * u / 2.0);
+            var y = (a + Math.cos(n * u / 2.0) * Math.sin(v) - Math.sin(n * u / 2.0) * Math.sin(2 * v)) * Math.sin(m * u / 2.0);
+            var z = Math.sin(n * u / 2.0) * Math.sin(v) + Math.cos(n * u / 2.0) * Math.sin(2 * v);
+            return new THREE.Vector3(x, y, z);
+        }
+        var paramFunction5 = function (u, v) {
             var u = u * Math.PI * 2;
             var v = v * 8 * Math.PI;
-
             var x = Math.pow(1.2, v) * Math.pow((Math.sin(u)), 0.5) * Math.sin(v);
             var y = v * Math.sin(u) * Math.cos(u);
             var z = Math.pow(1.2, v) * Math.pow((Math.sin(u)), 0.3) * Math.cos(v);
-
             return new THREE.Vector3(x, y, z);
         }
 
@@ -167,33 +197,33 @@
         window.addEventListener('resize', resize, false);
         setTimeout(resize, 1);
 
-        var geom = new THREE.ParametricGeometry(paramFunction1, 50, 100);
+        var geo1 = new THREE.ParametricGeometry(paramFunction5, 120, 100);
         var psMat = new THREE.PointCloudMaterial();
         psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
-        psMat.color = new THREE.Color(0x55ff55);
+        psMat.color = new THREE.Color(0xcc00cc);
         psMat.transparent = true;
         psMat.size = 2.4;
         psMat.blending = THREE.AdditiveBlending;
 
         // Create a new particle system based on the provided geometry
-        ps = new THREE.PointCloud(geom, psMat);
+        ps = new THREE.PointCloud(geo1, psMat);
         ps.name = 'param';
         ps.sizeAttenuation = true;
         ps.sortParticles = true;
-        ps.scale.set(100, 60, 60)
+        ps.scale.set(30, 30, 30)
 
         scene.add(ps);
 
-        var geo = new THREE.ParametricGeometry(paramFunction5, 100, 50);
+        var geo2 = new THREE.ParametricGeometry(paramFunction3, 100, 50);
         var psMater = new THREE.PointCloudMaterial();
-        psMat.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
-        psMat.color = new THREE.Color(0x55ff55);
-        psMat.transparent = true;
-        psMat.size = 2.4;
-        psMat.blending = THREE.AdditiveBlending;
+        psMater.map = THREE.ImageUtils.loadTexture("ps_smoke.png");
+        psMater.color = new THREE.Color(0xff3300);
+        psMater.transparent = true;
+        psMater.size = 2.4;
+        psMater.blending = THREE.AdditiveBlending;
 
         // Create a new particle system based on the provided geometry
-        ps2 = new THREE.PointCloud(geo, psMater);
+        ps2 = new THREE.PointCloud(geo2, psMater);
         ps2.name = 'param2';
         ps2.sizeAttenuation = true;
         ps2.sortParticles = true;

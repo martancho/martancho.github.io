@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Cardboard Example</title>
+    <title>skating CalArts</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -62,7 +62,7 @@
             highMid = fft.getEnergy("mid", "highMid");
             treble = fft.getEnergy("highMid", "treble");
 
-            console.log(mapTreble);
+            //console.log(mapTreble);
 
             scene.getObjectByName("param").rotation.x += treble/2000;
             scene.getObjectByName("param").rotation.y += treble/1000;
@@ -70,6 +70,7 @@
             scene.getObjectByName("param").scale.y += bass/200000;
             scene.getObjectByName("param").position.x += 0.0001;
             scene.getObjectByName("param").position.y += 0.001;
+
             scene.getObjectByName("param1").rotation.x += lowMid/10000;
             scene.getObjectByName("param1").rotation.y += lowMid/20000;
             scene.getObjectByName("param1").scale.x += highMid/100000;
@@ -79,7 +80,6 @@
 
             update(clock.getDelta());
             render(clock.getDelta());
-
             
         }
         
