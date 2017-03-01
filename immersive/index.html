@@ -22,10 +22,10 @@
     }
 
     h1{
-     font-size: large;
- }
+       font-size: large;
+   }
 
- p{
+   p{
     border-style: groove;
     border-width: 5px;
     border-color: #98bf21;
@@ -36,7 +36,7 @@ canvas{
 </style>
 
 <body bgcolor="#000000">
-<h1>VR Experiments</h1>
+    <h1>VR Experiments</h1>
     <p>
         <a href="electronicEnsamble.html"> Creative Electronic Ensamble</a>
     </p>
@@ -48,8 +48,7 @@ canvas{
     </p>
     
     <canvas></canvas>
-       <script type="text/javascript">
-        // This is where we are going to store the mouse information
+    <script type="text/javascript">
         var mouseX;
         var mouseY;
 
@@ -65,55 +64,57 @@ canvas{
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         // Be aware that when you resize the window, you will need to call (do) this again
-
+        
         //Create a new object called imageData that we can use to create some Image data 
-        var imageData = context.createImageData(canvas.width, canvas.height);
+        var imageData = context.createImageData(canvas.width,canvas.height);
 
 
         function draw() {
 
-            var position = 0;
+        var position = 0;
 
-            // draw the image where the mouse is  
-            for (var y = 0; y < imageData.height; y++) {
-                for (var x = 0; x < imageData.width; x++) {
+        //cos(n * pi * x / L) * cos(m * pi * y / L) - cos(m * pi * x / L) * cos(n * pi * y / L)
 
-                    var x1 = x - mouseX;
-                    var y1 = y - mouseY;
-                    var t = Math.sin(Math.sqrt(x1 * x1 + y1 * y1) / 100);
+        for (var y = 0; y < imageData.height; y++) {
+        for (var x = 0; x < imageData.width; x++) {
 
-                    var c = Math.abs(t * 128);
+        var x1=mouseX;
+        var y1=mouseY;
+        var L = 10000;
+        var t =Math.cos(x * Math.PI * x1 / L) * Math.cos(y * Math.PI * y1 / L) - Math.cos(y * Math.PI * x1 / L) * Math.cos(x * Math.PI * y1 /L);
 
-                    // set red, green, blue, and alpha:
-                    position = (x + y * imageData.width) * 4;
-                    imageData.data[position] = c % 255;
-                    imageData.data[position + 1] = c - 100;
-                    imageData.data[position + 2] = c - 200;
-                    imageData.data[position + 3] = 255; // opaque alpha
-                }
-                //  console.log(position);
-            }
+        var c = t * 255;
 
-            context.putImageData(imageData, 0, 0); // at coords 0,0
+        // set red, green, blue, and alpha:
+        position=(x+y*imageData.width)*4;
+        imageData.data[position] = c%255;
+        imageData.data[position+1] = c%255;
+        imageData.data[position+2] = c%255;
+        imageData.data[position+3] = 255; // opaque alpha
+    }
+    //  console.log(position);
+}
 
-        }
+context.putImageData(imageData, 0, 0); // at coords 0,0
 
-        //finally call setinterval.
-        setInterval(draw, 10);
-        //the end.
+}
 
-        //here's our function 'getMouse'.
-        function getMouse(mousePosition) {
+//finally call setinterval.
+setInterval(draw, 10);
+//the end.
 
-            if (mousePosition.layerX || mousePosition.layerX === 0) {
-                mouseX = mousePosition.layerX;
-                mouseY = mousePosition.layerY;
-            } else if (mousePosition.offsetX || mousePosition.offsetX === 0) {
-                mouseX = mousePosition.offsetX;
-                mouseY = mousePosition.offsetY;
-            }
-        }
-    </script>
+//here's our function 'getMouse'.
+function getMouse(mousePosition) {
+
+if (mousePosition.layerX || mousePosition.layerX === 0) {
+        mouseX = mousePosition.layerX;
+        mouseY = mousePosition.layerY;
+    } else if (mousePosition.offsetX || mousePosition.offsetX === 0) { 
+        mouseX = mousePosition.offsetX;
+        mouseY = mousePosition.offsetY;
+    }
+}
+</script>
 </body>
 
 </html>
