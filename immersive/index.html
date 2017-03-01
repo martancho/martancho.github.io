@@ -2,19 +2,29 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <title>Immersive Experiments</title>
 </head>
 <style type="text/css">
-body {
-    color: #ff3300;
-    font-size: large;
-    background-image: src:"5696.jpg";
-}
-h1{
-	font-size: large;
-}
+    html {
+        height: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
 
-p{
+    body {
+        min-height: 100%;
+    } 
+    h1,h2,h3,h4,h5,h6 {
+        font-weight: 100;
+    }
+
+    h1{
+     font-size: large;
+ }
+
+ p{
     border-style: groove;
     border-width: 5px;
     border-color: #98bf21;
@@ -22,18 +32,97 @@ p{
 
 </style>
 
-<body bgcolor="#33FFFF">
-<h1>Immersive Bay Experiments</h1>
+<body bgcolor="#000000">
+    
+    <div id="container"></div>
+    <h1>Immersive Bay Experiments</h1>
     <p>
-    <a href="transportation.html"> Creative Electronic Ensamble</a>
+        <a href="electronicEnsamble.html"> Creative Electronic Ensamble</a>
     </p>
     <p>
-        <a href="seaCreatures.html"> Calarts on RollerBlades</a>
+        <a href="rollerBlades.html"> Calarts on RollerBlades</a>
     </p>
     <p>
-        <a href="doloresPark.html"> Bay Area Transportation</a>        
+        <a href="BayArea.html"> Bay Area Transportation</a>        
     </p>
-<!-- <center><img src="/Users/martinvelez/Documents/GitHub/martancho.github.io/immersive/LOGO.svg"></center> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+        void main() { gl_Position = vec4( position, 1.0 ); }
+    </script>
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        //============================================================
+        //PUT YOUR GLSL CODE HERE
+        //============================================================
+        precision mediump float;
+        uniform vec2 resolution;
+        uniform vec2 mouse;
+        uniform float time;
+
+        void main(){
+
+        vec3 p = vec3((gl_FragCoord.xy-resolution/7.0)/(resolution.y),mouse.x);
+        for (float i = 0.; i < 9.; i++){
+        p = abs((sin(p)/dot(p, p)-1.) * sin(time/100.) * 4. * mouse.x );
+        if(length(p) > 1. && length(p) < 0.1) break;
+    }
+
+
+    gl_FragColor.rgb = p;
+    gl_FragColor.a = 1.0;
+}
+
+
+//============================================================
+//END OF GLSL CODE
+//============================================================
+</script>
+<script>
+    //change the resolution here. 1 is highest
+    var pixel_resolution = 3;
+    var container, stats;
+    var camera, scene, renderer;
+    var uniforms;
+    init();
+    animate();
+    function init() {
+    container = document.getElementById('container');
+    camera = new THREE.Camera();
+    //  camera.position.z = 0;
+    scene = new THREE.Scene();
+    var geometry = new THREE.PlaneBufferGeometry(2, 1);
+    uniforms = { time: { type: "f", value: 1.0 }, resolution: { type: "v2", value: new THREE.Vector2() }, mouse: {type: "v2", value: new THREE.Vector2()}};
+    var material = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: document.getElementById('vertexShader').textContent, fragmentShader: document.getElementById('fragmentShader').textContent });
+    var mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
+    renderer = new THREE.WebGLRenderer();
+    //Hack here to change resolution 
+    renderer.setPixelRatio((window.devicePixelRatio / pixel_resolution) * 8);
+    container.appendChild(renderer.domElement);
+    onWindowResize();
+    window.addEventListener('resize', onWindowResize, false);
+    window.addEventListener('mousemove', onMouseMove, false);
+
+}
+function onWindowResize(event) {
+renderer.setSize(window.innerWidth, window.innerHeight);
+uniforms.resolution.value.x = renderer.domElement.width;
+uniforms.resolution.value.y = renderer.domElement.height;
+
+}
+function animate() {
+requestAnimationFrame(animate);
+render();
+}
+function onMouseMove( event ) {
+uniforms.mouse.value.x = ( event.clientX / window.innerWidth );
+uniforms.mouse.value.y = ( event.clientY / window.innerHeight
+);
+}
+function render() {
+uniforms.time.value += 1;
+renderer.render(scene, camera);
+}
+</script>
 </body>
 
 </html>
