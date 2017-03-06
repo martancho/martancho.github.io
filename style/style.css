@@ -33,7 +33,8 @@
   hgroup,
   menu,
   nav,
-  section {
+  section,
+  canvas {
     margin: 0;
     padding: 0;
     border: 0;
@@ -178,7 +179,6 @@
 
     body {
       font-family: "Roboto Condensed Light", "Helvetica Neue", Helvetica, sans-serif;
-      background: #eee url("../img/bg-pattern.png") repeat 0 0;
     }
 
     p, #resume li {
@@ -246,8 +246,9 @@
 
     #masthead {
       color:#fff;
-      width:80%;
-    }
+      width:90%;
+      height: 400px;
+     }
 
 
     #nav h3 {
@@ -276,12 +277,12 @@
       bottom: .26em;
     }
 
-    #maya{
+    #mvm{
       width: 25%;
       height: 0;
       padding-bottom: 25%;
     }   
-    #maya img{
+    #mvm img{
       width: 100%;
     } 
 
@@ -320,7 +321,7 @@
 
     @media screen and (min-width: 45em){
       #container-header {
-        background:#352a38 url("../img/bg-photo-l.jpg") no-repeat top center;
+        background:#000 url("../img/bg-photo-l.jpg") no-repeat top center;
         padding: 10% 0;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -329,7 +330,7 @@
     }
     @media screen and (max-width: 45em){
       #container-header {
-        background:#352a38 url("../img/bg-photo-s.jpg") no-repeat top center;
+        background:#000 url("../img/bg-photo-s.jpg") no-repeat top center;
         padding: 50% 0;
         -webkit-background-size: cover;
         -moz-background-size: cover;
@@ -579,9 +580,9 @@
       width: 33.333%;
     }
     
-    #masthead {
+    /*#masthead {
       max-width:40em;
-    }
+    }*/
     #nav,
     #masthead,
     #content,
