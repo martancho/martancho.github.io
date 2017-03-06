@@ -185,7 +185,7 @@
             void setup() {
             size(window.innerHeight, window.innerWidth);
             colorMode(RGB, 2);
-            background(1, 1, 2);
+            background(2, 2, 2);
             z1 = new float[width][height];
             v1 = new float[width][height];
             z2 = new float[width][height];
@@ -197,30 +197,29 @@
 
         void draw() {
         for (int x = 1; x < width-1; x++) {
-        for (int y = 1; y < height-1; y++) {
-        v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * 0.25 - z1[x][y];
-        v2[x][y] += (z2[x-1][y] + z2[x+1][y] + z2[x][y-1] + z2[x][y+1] + z1[x][y]) * 0.25 - z2[x][y];
+            for (int y = 1; y < height-1; y++) {
+                v1[x][y] += (z1[x-1][y] + z1[x+1][y] + z1[x][y-1] + z1[x][y+1]) * 0.25 - z1[x][y];
+                v2[x][y] += (z2[x-1][y] + z2[x+1][y] + z2[x][y-1] + z2[x][y+1] + z1[x][y]) * 0.25 - z2[x][y];
+            }
+        }
+
+        for (int x = 1; x < width-1; x++) {
+            for (int y = 1; y < height-1; y++) {
+                z1[x][y] += v1[x][y];
+                z2[x][y] += v2[x][y];
+                z1[x][y] = constrain(z1[x][y], -1, 1);
+                z2[x][y] = constrain(z2[x][y], -1, 1);
+                pixels[width*y+x] = color(v1[x][y]+0.8, v2[x][y]+0.6, v2[x][y] + 1.7);
+                }
+            }
+        updatePixels();
     }
-}
-
-for (int x = 1; x < width-1; x++) {
-for (int y = 1; y < height-1; y++) {
-z1[x][y] += v1[x][y];
-z2[x][y] += v2[x][y];
-z1[x][y] = constrain(z1[x][y], -1, 1);
-z2[x][y] = constrain(z2[x][y], -1, 1);
-pixels[width*y+x] = color(v1[x][y] + 1, v2[x][y] + 1, 2);
-}
-}
-
-updatePixels();
-}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void mouseMoved() {
-v1[mouseX][mouseY] = randomGaussian();
-v2[mouseX][mouseY] = randomGaussian();
+v1[mouseX*2][mouseY*4] = randomGaussian();
+v2[mouseX*2][mouseY*4] = randomGaussian();
 }
 
 </script>
