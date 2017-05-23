@@ -177,7 +177,7 @@ html {
 
 body {
   font-family: "Roboto Condensed Light", "Helvetica Neue", Helvetica, sans-serif;
-  background: #eee url("../images/stars.jpg") repeat 0 0;
+  background: #eee url("../images/stars-min.jpg") repeat 0 0;
   color: cyan;
 }
 
@@ -208,6 +208,7 @@ h1, h2 {
 h3 {
   font-size: 1.382em; 
   line-height: 1.223;
+  color: #000;
 }
         
 h4 {
@@ -233,9 +234,12 @@ h5,h6 {
   font-weight: 500;
 }
 
-h6 {
+h6{
   color: #aaa;
-  font-weight: 200;
+  font-weight: 400;
+}
+li{
+  color: #aaa;
 }
     
 .wrapper {
