@@ -59,6 +59,50 @@
 			#limitless img {
 				width: 100%;
 			}
+
+			.name, .email, .subject {
+				float: center;
+				width: 50%;
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+
+			.name {
+				padding-right: .65em;
+			}
+
+			.email {
+				padding-right: .65em;
+			}
+
+			.subject {
+				padding-right: .65em;
+			}
+
+			.send {
+				width: 48.6%;
+			}
+			/* ******************************************
+    		Media Queries for screen wider than 60em (960px)
+  			****************************************** */
+			@media screen and (min-width: 60em) {
+
+				.name, .email, .subject {
+					padding-right: 1.3em;
+					padding-left: 0;
+					clear: both;
+				} 
+
+				.message textarea {
+					width: 50%;
+				}
+
+				.send {
+					width: 25%;
+					margin-left: 50%;
+				}
+			}
 		</style>
 
 	</head>
@@ -83,7 +127,7 @@
 
 			</section>
 		</div>
-		<div id="container-header" style="background: #352a38 url(../images/la-by-night.jpg) repeat 0 0; background-size: cover; padding: 5% 0">
+		<div id="container-header" style="background: #352a38 url(./images/la-by-night.jpg) repeat 0 0; background-size: cover; padding: 5% 0">
 			<header id="masthead" class="wrapper">
 				<figure id="limitless"> 
 					<div data-picture data-alt="Maya Chopra">
@@ -131,7 +175,7 @@
 						<div class="box">
 							<h4>Cellphones</h4>
 							<figure>
-							<img src="../images/smartphones.png" alt="smartphones" style="margin:5px auto;"/>
+								<img src="../images/smartphones.png" alt="smartphones" style="margin:5px auto;"/>
 							</figure>
 						</div>
 					</article>
@@ -140,7 +184,7 @@
 						<div class="box">
 							<h4>Tablets</h4>
 							<figure>
-							<img src="../images/ipad.png" alt="tablets" style="margin:5px auto;"/>
+								<img src="../images/ipad.png" alt="tablets" style="margin:5px auto;"/>
 							</figure>
 						</div>
 					</article>
@@ -149,7 +193,7 @@
 						<div class="box">
 							<h4>Laptops</h4>
 							<figure>
-							<img src="../images/laptop.png" alt="laptops" style="margin:5px auto;"/>
+								<img src="../images/laptop.png" alt="laptops" style="margin:5px auto;"/>
 							</figure>
 						</div>
 					</article>
@@ -159,10 +203,10 @@
 			</article>
 		</div>
 		<div id="container-footer">
-			<form id="contact">
+			<form id="contact" class="textCenter">
 				<fieldset class="wrapper">
-					<legend style="text-align: center;"><u>Contact Us</u></legend>
-					<h5 class="textCenter" style="text-transform: uppercase;">Contact us for more details about our <b>products and services</b></h5>
+					<legend><u>Contact Us</u></legend>
+					<h5 style="text-transform: uppercase;">Contact us for more details about our <b>products and services</b></h5>
 					<ul class="group">
 						<li class="name">
 							<label for="name">Your Name</label>
@@ -172,8 +216,12 @@
 							<label for="email">Your Email</label>
 							<input type="email" id="email" name="email" />
 						</li>
+						<!-- <li class="subject">
+							<label for="subject">Subject</label>
+							<input type="text" id="subject" name="subject" />
+						</li> -->
 						<li class="message">
-							<label for="message">Say Hello</label>
+							<label for="message">Comments</label>
 							<textarea id="message" name="message"></textarea>
 						</li>
 					</ul>
