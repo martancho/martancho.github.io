@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>circle points</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	var width;
+	var height;
+	function setup(){
+	width = windowWidth;
+	height = windowHeight;
+	createCanvas(width, height);
+	noStroke();
+	}
+
+	function draw(){
+	background(0);
+	translate(width/2, height/2);
+	for(x=-100; x<=100; x+=10){
+	  for(y=-100; y<=100; y+=10){
+	  	var d = dist(x, y, 0, 0);
+	  	var d2 = sin(radians(d))*d;
+	  	fill(0,155, 255);
+	  	push();
+	  	translate(x, y);
+	  	rotate(radians(d + frameCount));
+	  	ellipse(x, y, 5, 5);
+	  	pop();
+	    }
+	  }
+	}
+	
+</script>
+
+</body>
+</html>
