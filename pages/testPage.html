@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="../style/bootstrap-responsive.css" />
 	<link rel="stylesheet" href="../style/style.css" />
 	<link rel="stylesheet" href="../style/bootstrap-responsive.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- Normalize hide address bar for iOS and Android -->
 	<script src="../scripts/hideaddressbar.js"></script>
@@ -39,12 +40,22 @@
 		<![endif]-->
 
 		<style type="text/css">
+		@font-face{
+			font-family: sourceSansPro;
+			src: url('../fonts/SourceSansPro-Regular.ttf');
+		}
+		body{
+			background: #eee url(../images/bg-pattern.png) repeat 0 0; 
+			color:#444;
+			font-family: sourceSansPro, sans-serif;
+		}
+
 			#products article {
 				float: left;
 				width: 33.333%;
 			}
 			h1, h4{
-				color: #eee;
+				color: #333;
 			}
 
 			.textCenter{
@@ -83,6 +94,16 @@
 			.send {
 				width: 48.6%;
 			}
+
+			.fa {
+    		padding: 20px;
+    		font-size: 30px;
+    		width: 30px;
+    		text-align: center;
+    		color:#888;
+    		text-decoration: none;
+    		border-radius: 50%;
+			}
 			/* ******************************************
     		Media Queries for screen wider than 60em (960px)
   			****************************************** */
@@ -107,17 +128,20 @@
 
 	</head>
 
-	<body lang="en" style="background: #eee url(../images/bg-pattern.png) repeat 0 0; color:#000">
+	<body lang="en">
 		<div id="container-nav">
+		
 			<section id="nav" class="group wrapper">
-				<h3>LIMITLESSUSA</h3>
+
+				<!-- <h3>LIMITLESSUSA</h3> -->
 				<!-- Checkbox Hack markup -->
 				<input type="checkbox" id="toggle" />
 				<label for="toggle" onclick>Menu</label>
 				<!-- /Checkbox Hack markup -->
 				<nav>
-					<ul>
-						<li><a href="#portfolio">HOME</a></li>
+					<ul class="textCenter">
+					<img src="../images/dark_logo_transparent_s.png" style="float: left;">
+						<li><a href="#home">HOME</a></li>
 						<li><a href="#aboutUs">ABOUT</a></li>
 						<li><a href="#products">PRODUCTS & SERVICES</a></li>
 						<li><a href="#contact">Contact</a></li>
@@ -127,13 +151,13 @@
 
 			</section>
 		</div>
-		<div id="container-header" style="background: #352a38 url(../images/la-by-night.jpg) repeat 0 0; background-size: cover; padding: 5% 0">
+		<div id="container-header" style="background: #352a38 url(../images/background.png) repeat 0 0; background-size: cover; padding: 1% 0">
 			<header id="masthead" class="wrapper">
 				<figure id="limitless"> 
 					<div data-picture data-alt="Maya Chopra">
-						<div data-src="../images/white_logo_transparent_s.png"></div>
-						<div data-src="../images/white_logo_transparent_m.png" data-media="(min-width: 45em)"></div>
-						<div data-src="../images/logo_transparent_background_l.png" data-media="(min-width: 60em)"></div>
+						<div data-src="../images/dark_logo_transparent_s.png"></div>
+						<div data-src="../images/dark_logo_transparent_m.png" data-media="(min-width: 45em)"></div>
+						<div data-src="../images/dark_logo_transparent_l.png" data-media="(min-width: 60em)"></div>
 						<!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
 						<noscript>
 							<img src="../images/white_logo_transparent_s.png" alt="Limitless USA">
@@ -141,9 +165,9 @@
 					</div>
 				</figure>
 				
-				<h1 class="textCenter">Wholesale Partnerships and Wholesale Opportunities</h1>
+				<h1 class="textCenter" style="margin-top: -55px">Wholesale Partnerships and Wholesale Opportunities</h1>
 
-				<h4 class="textCenter">work with us</h4>
+				<h3 class="textCenter">work with us</h3>
 			</header>
 		</div>
 		<div id="container-content">
@@ -227,7 +251,13 @@
 					</ul>
 					<input class="send" type="submit" name="submit" value="Send" />
 				</fieldset>
-			</form>           
+			</form> 
+			<div class="textCenter">
+			<a href="#" class="fa fa-facebook"></a>
+			<a href="#" class="fa fa-twitter"></a>  
+			<a href="#" class="fa fa-instagram"></a>
+			<a href="#" class="fa fa-linkedin"></a>    
+			</div>    
 			<footer id="colophon" class="wrapper textCenter">
 				<p>Copyright © 2017 LIMITLESS USA all rights reserved. </p>
 			</footer>
