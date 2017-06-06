@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Atila Pad</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/p5.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.dom.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.11/addons/p5.sound.js"></script>
+</head>
+<style type="text/css">
+
+	body{
+		background-color: cyan;
+	}
+	h1{
+		text-align: center;
+		color: #000;
+	}
+	button{
+		cursor: pointer;
+		margin: 10% 10%;
+		font-size: 24px;
+		line-height: normal;
+		vertical-align: baseline;
+		color: red;
+		background-color: #000;
+		border-radius: 8px;
+	}
+	button:hover{
+		background-color: #666;
+	}
+</style>
+<body>
+	<script type="text/javascript">
+		var height;
+		var width;
+		var samp, samp2, samp3, samp4, samp5, samp6, samp7, samp8, samp8, samp10, samp11, samp12, samp13, samp14, samp15, samp16, samp17, samp18;
+		var samp19, samp20;
+		var playMode = 'sustain';
+
+		function preload(){
+		samp = loadSound('../audio/carullaJumbo.mp3');
+		samp2 = loadSound('../audio/chimbaGuevon.mp3');
+		samp3 = loadSound('../audio/claroQueSi.mp3');
+		samp4 = loadSound('../audio/comoAsi.mp3');
+		samp5 = loadSound('../audio/cuandoTocaToca.mp3');
+		samp6 = loadSound('../audio/densa.mp3');
+		samp7 = loadSound('../audio/digameYa.mp3');
+		samp8 = loadSound('../audio/farraUniversal.mp3');
+		samp9 = loadSound('../audio/hagale.mp3');
+		samp10 = loadSound('../audio/holaBebe.mp3');
+		samp11 = loadSound('../audio/juicioso.mp3');
+		samp12 = loadSound('../audio/jules.mp3');
+		samp13 = loadSound('../audio/ninoRuso.mp3');
+		samp14 = loadSound('../audio/noJuegueConmigo.mp3');
+		samp15 = loadSound('../audio/obviamente.mp3');
+		samp16 = loadSound('../audio/onceDoce.mp3');
+		samp17 = loadSound('../audio/pabloPirobo.mp3');
+		samp18 = loadSound('../audio/paella.mp3');
+		samp19 = loadSound('../audio/peguelo.mp3');
+		samp20 = loadSound('../audio/queMas.mp3');
+	}
+
+	function setup(){
+	width = windowWidth;
+	height = windowHeight;
+	createCanvas(width, height);
+	background(150, 100, 200);
+}
+
+function playSamp(){
+samp.setVolume(0.8);
+samp.play();
+samp.playMode(playMode);
+}
+function playSamp2(){
+samp2.setVolume(0.8);
+samp2.play();
+samp2.playMode(playMode);
+}
+function playSamp3(){
+samp3.setVolume(0.8);
+samp3.play();
+samp3.playMode(playMode);
+}
+function playSamp4(){
+samp4.setVolume(0.8);
+samp4.play();
+samp4.playMode(playMode);
+}
+function playSamp5(){
+samp5.setVolume(0.8);
+samp5.play();
+samp5.playMode(playMode);
+}
+function playSamp6(){
+samp6.setVolume(0.8);
+samp6.play();
+samp6.playMode(playMode);
+}
+function playSamp7(){
+samp7.setVolume(0.8);
+samp7.play();
+samp7.playMode(playMode);
+}
+function playSamp8(){
+samp8.setVolume(0.8);
+samp8.play();
+samp8.playMode(playMode);
+}
+function playSamp9(){
+samp9.setVolume(0.8);
+samp9.play();
+samp9.playMode(playMode);
+}
+function playSamp10(){
+samp10.setVolume(0.8);
+samp10.play();
+samp10.playMode(playMode);
+}
+function playSamp11(){
+samp11.setVolume(0.8);
+samp11.play();
+samp11.playMode(playMode);
+}
+function playSamp12(){
+samp12.setVolume(0.8);
+samp12.play();
+samp12.playMode(playMode);
+}
+function playSamp13(){
+samp13.setVolume(0.8);
+samp13.play();
+samp13.playMode(playMode);
+}
+function playSamp14(){
+samp14.setVolume(0.8);
+samp14.play();
+samp14.playMode(playMode);
+}
+function playSamp15(){
+samp15.setVolume(0.8);
+samp15.play();
+samp15.playMode(playMode);
+}
+function playSamp16(){
+samp16.setVolume(0.8);
+samp16.play();
+samp16.playMode(playMode);
+}
+function playSamp17(){
+samp17.setVolume(0.8);
+samp17.play();
+samp17.playMode(playMode);
+}
+function playSamp18(){
+samp18.setVolume(0.8);
+samp18.play();
+samp18.playMode(playMode);
+}
+function playSamp19(){
+samp19.setVolume(0.8);
+samp19.play();
+samp19.playMode(playMode);
+}
+function playSamp20(){
+samp20.setVolume(0.8);
+samp20.play();
+samp20.playMode(playMode);
+}
+
+
+</script>
+<h1><u>ATILA PAD</u></h1>
+<table style="text-align: center; margin: 50px auto 0px auto;">
+	<tr>
+		<td><button type="button" onclick="playSamp()"> Atila 1</button></td>
+		<td><button type="button" onclick="playSamp2()"> Atila 2</button></td>
+		<td><button type="button" onclick="playSamp3()"> Atila 3</button></td>
+		<td><button type="button" onclick="playSamp4()"> Atila 4</button></td> 
+	</tr>
+	<tr>
+		<td><button type="button" onclick="playSamp5()"> Atila 5</button></td>
+		<td><button type="button" onclick="playSamp6()"> Atila 6</button></td>
+		<td><button type="button" onclick="playSamp7()"> Atila 7</button></td>
+		<td><button type="button" onclick="playSamp8()"> Atila 8</button></td> 
+	</tr>
+	<tr>
+		<td><button type="button" onclick="playSamp9()"> Atila 9</button></td>
+		<td><button type="button" onclick="playSamp10()"> Atila 10</button></td>
+		<td><button type="button" onclick="playSamp11()"> Atila 11</button></td>
+		<td><button type="button" onclick="playSamp12()"> Atila 12</button></td> 
+	</tr>
+	<tr>
+		<td><button type="button" onclick="playSamp13()"> Atila 13</button></td>
+		<td><button type="button" onclick="playSamp14()"> Atila 14</button></td>
+		<td><button type="button" onclick="playSamp15()"> Atila 15</button></td>
+		<td><button type="button" onclick="playSamp16()"> Atila 16</button></td> 
+	</tr>
+	<tr>
+		<td><button type="button" onclick="playSamp17()"> Atila 17</button></td>
+		<td><button type="button" onclick="playSamp18()"> Atila 18</button></td>
+		<td><button type="button" onclick="playSamp19()"> Atila 19</button></td>
+		<td><button type="button" onclick="playSamp20()"> Atila 20</button></td> 
+	</tr>
+</table>
+</body>
+</html>
