@@ -2,18 +2,22 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>360 Video</title>
-    <meta name="description" content="360 Video — A-Frame">
+    <title>Videosphere</title>
+    <meta name="description" content="Videosphere - A-Frame">
     <script src="../scripts/aframe-master.js"></script>
   </head>
   <body>
-    <a-scene>
+    <a-scene stats>
       <a-assets>
-        <video id="video" src="../cuarto.mp4"
-               autoplay loop crossorigin="anonymous"></video>
+        <video id="lego" preload="true"
+               src="../cuarto.MP4"
+               width="360" height="360" autoplay loop="true"
+               crossOrigin="anonymous"></video>
       </a-assets>
 
-      <a-videosphere src="#video" rotation="0 180 0"></a-videosphere>
+      <a-entity material="shader: flat; src: #lego" geometry="primitive: sphere; radius: 100"
+                scale="-1 1 1">
+      </a-entity>
     </a-scene>
   </body>
 </html>
