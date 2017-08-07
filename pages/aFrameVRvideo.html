@@ -7,17 +7,15 @@
     <script src="../scripts/aframe-master.js"></script>
   </head>
   <body>
-    <a-scene stats>
+    <a-scene>
       <a-assets>
-        <video id="lego" preload="true"
-               src="../cuarto.MP4"
-               width="360" height="360" autoplay loop="true"
-               crossOrigin="anonymous"></video>
+        <video id="video" src="https://ucarecdn.com/fadab25d-0b3a-45f7-8ef5-85318e92a261/"
+               autoplay loop crossorigin="anonymous" playsinline webkit-playsinline></video>
       </a-assets>
 
-      <a-entity material="shader: flat; src: #lego" geometry="primitive: sphere; radius: 100"
-                scale="-1 1 1">
-      </a-entity>
+      <a-videosphere src="#video" rotation="0 180 0" position scale visible material geometry></a-videosphere>
+      <canvas class="a-canvas a-grab-crusor" data-aframe-canvas="true" width="963" height="745" style="width: 963px; height: 745px;"></canvas>
+      
     </a-scene>
   </body>
 </html>
