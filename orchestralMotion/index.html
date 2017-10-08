@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Orchestral Motion</title>
+
+</head>
+<body>
+
+	<button id="send">Send Message</button>
+	<script type="text/javascript" src="dist/osc.min.js"></script>
+	<script type="text/javascript">
+  var osc = new OSC();
+  osc.open(); // connect by default to ws://localhost:8080
+ 
+  document.getElementById('send').addEventListener('click', function() {
+    var message = new OSC.Message('/test/random', Math.random());
+    osc.send(message);
+  });
+</script> 
+
+</body>
+</html>
