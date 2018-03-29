@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>office 360</title>
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+  <script src="../aframe-resonance-audio-component.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
+      <audio id="track" src="laByBike.wav"></audio>
+    </a-assets>
+    <a-sky src="galaxyAtlas.JPG" rotation="0 90 0"></a-sky>
+    <a-entity
+        material="wireframe:true"
+        position="0 0 -0"
+        resonance-audio-room="
+          width:2;
+          height:2;
+          depth:2;
+          ambisonicOrder:3;
+          speedOfSound:343;
+          left:brick-bare;
+          right:brick-bare;
+          front:brick-bare;
+          back:brick-bare;
+          down:parquet-on-concrete;
+          up:acoustic-ceiling-tiles">
+        <a-entity
+          position="0 2 0"
+          resonance-audio-src="src:#track; loop:true; autoplay:true"></a-entity>
+      <a-entity>
+  </a-scene>
+</body>
+<script type="text/javascript">
+  let sceneEl = document.querySelector('a-scene');
+  let entity = sceneEl.querySelector('a-entity');
+  console.log(entity.getAttribute('geometry').primitive);
+  //entity.setAttribute('visible', false);
+</script>
+</html>
