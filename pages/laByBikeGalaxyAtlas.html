@@ -12,31 +12,11 @@
       <audio id="track" src="../audio/laByBike.wav" autoplay="true" loop="true"></audio>
     </a-assets>
     <a-sky src="../images/galaxyAtlas.JPG" rotation="0 90 10"></a-sky>
-    <!--<a-entity
-        material="wireframe:true"
-        position="0 1.5 0"
-        resonance-audio-room="
-          width:3;
-          height:3;
-          depth:3;
-          ambisonicOrder:3;
-          speedOfSound:343;
-          left:brick-bare;
-          right:brick-bare;
-          front:brick-bare;
-          back:brick-bare;
-          down:parquet-on-concrete;
-          up:acoustic-ceiling-tiles">
-        <a-entity
-          position="0 0 0"
-          resonance-audio-src="src:#track; loop:true; autoplay:true"></a-entity>
-      <a-entity>-->
+    
   </a-scene>
 </body>
 <script type="text/javascript">
-  let sceneEl = document.querySelector('a-scene');
-  let entity = sceneEl.querySelector('a-entity');
-  console.log(entity.getAttribute('geometry').primitive);
+
   //entity.setAttribute('visible', false);
 </script>
 </html>
