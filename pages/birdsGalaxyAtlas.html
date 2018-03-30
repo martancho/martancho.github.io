@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" content="360&deg; Image - A-Frame">
+  <title>LA by bike Galaxy Atlas</title>
+  <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+  <script src="../aframe-resonance-audio-component.js"></script>
+</head>
+<body>
+  <a-scene>
+    <a-assets>
+      <audio id="track" src="../audio/birds.wav" autoplay="true" loop="true"></audio>
+    </a-assets>
+    <a-sky src="../images/galaxyAtlas2.JPG" rotation="0 90 10"></a-sky>
+    <!--<a-entity
+        material="wireframe:true"
+        position="0 1.5 0"
+        resonance-audio-room="
+          width:3;
+          height:3;
+          depth:3;
+          ambisonicOrder:3;
+          speedOfSound:343;
+          left:brick-bare;
+          right:brick-bare;
+          front:brick-bare;
+          back:brick-bare;
+          down:parquet-on-concrete;
+          up:acoustic-ceiling-tiles">
+        <a-entity
+          position="0 0 0"
+          resonance-audio-src="src:#track; loop:true; autoplay:true"></a-entity>
+      <a-entity>-->
+  </a-scene>
+</body>
+</html>
