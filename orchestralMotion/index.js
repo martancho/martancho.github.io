@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Orchestral Motion</title>
-
-</head>
-<body>
-	<script>
-		var osc = require("osc");
+var osc = require("osc");
 
 		var udpPort = new osc.UDPPort({
 			// This is the port we're listening on.
@@ -41,8 +33,3 @@
 			console.log("Sending message", msg.address, msg.args, "to", udpPort.options.remoteAddress + ":" + udpPort.options.remotePort);
 			udpPort.send(msg);
 		}, 1000);
-
-	</script> 
-
-</body>
-</html>

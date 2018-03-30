@@ -1,0 +1,22 @@
+{
+  "name": "orchestralmotion",
+  "version": "1.0.0",
+  "description": "hack music LA ",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/martancho/martancho.github.io.git"
+  },
+  "keywords": [
+    "orchestra"
+  ],
+  "author": "Martin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/martancho/martancho.github.io/issues"
+  },
+  "homepage": "https://github.com/martancho/martancho.github.io#readme"
+}

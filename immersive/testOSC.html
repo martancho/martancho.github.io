@@ -35,19 +35,15 @@
     // global variables
     var udpPort = new osc.UDPPort({
     localAddress: "127.0.0.1",
-    localPort: 10000,
-
-    remoteAddress: "127.0.0.1",
-    remotePort: 57120,
-    metadata: true
+    localPort: 57120,
     });
-    
+
     var renderer, scene, camera, effect, controls, element, container;
     var clock = new THREE.Clock();
     var sound,
-        bass,
-        lowMid,
-        highMid,
+        x,
+        y,
+        z,
         treble,
         waveform,
         spectrum,
@@ -55,9 +51,7 @@
 
     init();
     animate();
-    function preload() {
-        sound = loadSound("data/electronicJam.mp3")
-    }
+
 
     function setup() {
         cnv = createCanvas(1, 1);
@@ -68,12 +62,6 @@
 
     function draw() {
         background(0);
-        waveform = fft.waveform();
-        spectrum = fft.analyze();
-        bass = fft.getEnergy("bass", "lowMid");
-        lowMid = fft.getEnergy("lowMid", "mid");
-        highMid = fft.getEnergy("mid", "highMid");
-        treble = fft.getEnergy("highMid", "treble");
         
         var test1 = scene.getObjectByName("param").rotation.x += Math.cos(treble/100);
         scene.getObjectByName("param").rotation.z += Math.cos(highMid/100);
@@ -93,6 +81,31 @@
         console.log(test1);
 
     }
+
+    udpPort.on("message", function (oscMsg) {
+
+        if(oscMsg.address == '/pos'){
+            x = oscMsg.args[0];
+            y = oscMsg.args[1];
+            z = oscMsg.args[2];
+            console.log([x, y, z]);
+        }
+        var data = {
+          x: x,
+          y: y,
+          z: z
+      };
+      payload = {
+          "pk": 1,
+          "action": "create",
+          "data": data
+      };
+      const msg = {
+        stream: "position",
+        payload: payload
+    }
+    ws.send(JSON.stringify(msg));
+    })
 
     function init() {
 
